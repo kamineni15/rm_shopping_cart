@@ -10,11 +10,24 @@ object ShoppingCart {
   // Each Item price..
   private val itemsPriceList: Map[String, Double] = Map(("apple", 0.60), ("orange", 0.25))
 
-  //Basic Checkout
+//  //Basic Checkout
+//  def checkout(items: Array[String]): Double = {
+//    val total = items.flatMap(price).sum
+//    BigDecimal(total).setScale(2, RoundingMode.HALF_EVEN).toDouble
+//  }
+
+  //Checkout with or with out offers
   def checkout(items: Array[String]): Double = {
-    val total = items.flatMap(price).sum
-    BigDecimal(total).setScale(2, RoundingMode.HALF_EVEN).toDouble
+    val noOfApples: Int = items.count(p => p.equalsIgnoreCase("apple"))
+    val noOfOranges: Int = items.count(p => p.equalsIgnoreCase("orange"))
+
+    // To calculate total items price based on offers
+    val totalPrice = Offers.offer("apple")(noOfApples) + Offers.offer("orange")(noOfOranges)
+
+    // To round total price to half even
+    BigDecimal(totalPrice).setScale(2, RoundingMode.HALF_EVEN).toDouble
   }
+
 
   def getPrice(item: String): Double = {
     itemsPriceList.getOrElse(item toLowerCase, 0)
