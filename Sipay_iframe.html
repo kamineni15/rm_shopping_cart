@@ -1,0 +1,66 @@
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>VIEX</title>
+
+<!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+<!--— START: VISA CHECKOUT EVENTS —-->
+<script type="text/javascript">
+    if (self === top) {
+        var antiClickjack = document.getElementById("antiClickjack");
+        antiClickjack.parentNode.removeChild(antiClickjack);
+    } else {
+        top.location = self.location;
+    }
+</script>
+
+<script type="text/javascript">
+function onVisaCheckoutReady(){
+         V.init( {
+         apikey: "E6AUTCRF5IQI2T4362K013NxgOF11WgvdDxAp0fjvflr0jx8M",
+         externalClientId: "4a96529d-2c8a-a711-6a7d-1585317d4701",
+          paymentRequest:{
+           currencyCode: "EUR",
+           
+           total: "90.00"
+           },
+				settings: {
+					
+					displayName: "Lavanapp",
+					shipping: {
+						collectShipping: "false"
+					},
+					review: {
+						message: "Return to Lavanapp to complete your purchase",
+						buttonAction: "Continue"
+					},
+					dataLevel: "FULL"
+				}
+				
+         });
+
+V.on("payment.success", function(payment){ alert (JSON.Stringify(payment)); });
+V.on("payment.cancel", function(payment){ alert (JSON.Stringify(payment)); });
+V.on("payment.error", function(payment, error){ alert (JSON.Stringify(payment)); });
+
+         }
+</script>
+
+
+</head>
+<body style="margin: 0px; padding: 0px;">
+
+<img alt="Visa Checkout" class="v-button" role="button" src="https://sandbox.secure.checkout.visa.com/wallet-services-web/xo/button.png"/>
+<a class="v-learn v-learn-default" href="#" data-locale="">Tell Me More</a>
+
+<script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="https://sandbox-assets.secure.checkout.visa.com/checkout-widget/resources/js/integration/v1/sdk.js">
+</script>
+</body>
+</html>
